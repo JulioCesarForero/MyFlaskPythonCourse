@@ -1,5 +1,6 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_current_user
 from sqlalchemy.exc import SQLAlchemyError
 
 from db import db
@@ -45,10 +46,24 @@ class ItemList(MethodView):
     @blp.response(200, ItemSchema(many=True))
     def get(self):
         return ItemModel.query.all()
-
+    
+    @jwt_required()
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)
     def post(self, item_data):
+        # Obtener información del usuario actual desde el JWT
+        try:
+            user_id = get_jwt_identity()
+            current_user = get_current_user()
+            
+            print(f"Usuario autenticado - ID: {user_id}")
+            if current_user:
+                print(f"Usuario encontrado: {current_user.username}")
+            
+        except Exception as e:
+            print(f"Error al obtener usuario: {e}")
+            abort(401, message="Error de autenticación")
+
         item = ItemModel(**item_data)
 
         try:

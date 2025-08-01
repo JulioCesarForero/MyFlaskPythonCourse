@@ -1,8 +1,28 @@
-version: '3'
+version: '3.8'
+
 services:
   web:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5005:5000"
     volumes:
+      # Mount source code for hot reload (excluding __pycache__ and other unnecessary files)
       - .:/app
+      - /app/__pycache__
+      - /app/.pytest_cache
+    # Cargar variables de entorno desde el archivo .env
+    env_file:
+      - .env
+    environment:
+      - FLASK_APP=app.py
+    # Keep container running even if it crashes
+    restart: unless-stopped
+    # Add health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/swagger-ui"] 
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

@@ -1,4 +1,39 @@
-__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
 .venv
-instance
+venv/
+env/
+ENV/
+
+# Flask
+instance/
 .flaskenv
+
+# Environment variables - IMPORTANTE: mantener .env fuera del repositorio
+.env
+.env.local
+.env.production
+.env.staging
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data.db
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
