@@ -1,5 +1,30 @@
 # Notas del proyecto para tener en cuenta su correcta ejecucion 
 
+
+1. **Clona el repositorio**:
+   ```bash
+   git clone git@github.com:JulioCesarForero/MyFlaskPythonCourse.git
+   cd MyFlaskPythonCourse
+   ```
+
+2. **Crea y activa un entorno virtual**:
+   ```bash
+   # Crear entorno virtual
+   python -m venv venv
+   
+   # Activar entorno virtual
+   # En Windows:
+   venv\Scripts\activate
+   
+   # En Linux/macOS:
+   source venv/bin/activate
+   ```
+
+3. **Instala las dependencias**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ## Activate Virtual Py Environment 
 
 .venv\Scripts\activate
